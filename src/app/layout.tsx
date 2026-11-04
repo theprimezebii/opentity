@@ -29,13 +29,11 @@ export const metadata: Metadata = {
     title: `${APP_NAME} — Discover Global Tech Events`,
     description: APP_DESCRIPTION,
     siteName: APP_NAME,
-    images: [{ url: `${APP_URL}/logos/logo-full-transparent.png`, width: 1200, height: 630, alt: APP_NAME }],
   },
   twitter: {
     card: "summary_large_image",
     title: `${APP_NAME} — Discover Global Tech Events`,
     description: APP_DESCRIPTION,
-    images: [`${APP_URL}/logos/logo-full-transparent.png`],
   },
 };
 
