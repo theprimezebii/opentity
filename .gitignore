@@ -39,3 +39,5 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+OPENTITY_HANDOFF.md
+scripts/*.disabled

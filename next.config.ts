@@ -1,9 +1,13 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
   cacheComponents: true,
   partialPrefetching: true,
+  experimental: {
+    serverActions: {
+      bodySizeLimit: "15mb",
+    },
+  },
   turbopack: {
     rules: {
       "*.css": {
@@ -11,6 +15,16 @@ const nextConfig: NextConfig = {
         as: "*.css",
       },
     },
+  },
+  // Required for next/image to load external Unsplash images
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "images.unsplash.com",
+        pathname: "/**",
+      },
+    ],
   },
 };
 

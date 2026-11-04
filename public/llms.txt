@@ -1,0 +1,16 @@
+# Opentity
+
+> Opentity is a global platform for discovering hackathons, tech competitions, and AI events. It serves as a central hub for students and developers to find opportunities, track deadlines, and engage with the tech community.
+
+## Core Pages
+
+- [Homepage](https://opentity.com/): Discover global tech events.
+- [Events List](https://opentity.com/events): Browse and filter hackathons and competitions by category, city, and format.
+- [Leaderboard](https://opentity.com/leaderboard): Weekly ranking of top-performing students.
+- [Submit an Event](https://opentity.com/submit): Submit a new hackathon or tech event for review.
+
+## Key Information
+
+- **Coverage**: Global, with a strong presence in Pakistan.
+- **Event Categories**: AI, Web Development, Mobile, Data Science, Cybersecurity, Blockchain, IoT, Game Development.
+- **Event Formats**: Online, In-person, Hybrid.

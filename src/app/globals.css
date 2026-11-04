@@ -1,26 +1,184 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --color-brand-50:  #fff7ed;
+  --color-brand-100: #ffedd5;
+  --color-brand-200: #fed7aa;
+  --color-brand-300: #fdba74;
+  --color-brand-400: #fb923c;
+  --color-brand-500: #f97316;
+  --color-brand-600: #ea580c;
+  --color-brand-700: #c2410c;
+  --color-brand-800: #9a3412;
+  --color-brand-900: #7c2d12;
+
+  --color-orange-50:  var(--color-brand-50);
+  --color-orange-100: var(--color-brand-100);
+  --color-orange-200: var(--color-brand-200);
+  --color-orange-300: var(--color-brand-300);
+  --color-orange-400: var(--color-brand-400);
+  --color-orange-500: var(--color-brand-500);
+  --color-orange-600: var(--color-brand-600);
+  --color-orange-700: var(--color-brand-700);
+  --color-orange-800: var(--color-brand-800);
+  --color-orange-900: var(--color-brand-900);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+@keyframes marquee {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+.animate-marquee { animation: marquee 55s linear infinite; }
+.animate-marquee:hover { animation-play-state: paused; }
+
+.hide-scrollbar::-webkit-scrollbar { display: none; }
+.hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+/* Force pointer cursor on all interactive elements */
+button, a, [role="button"], select, input[type="submit"] {
+  cursor: pointer !important;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/* =========================================
+   AUTH SLIDER ANIMATIONS
+   ========================================= */
+.auth-container {
+  position: relative;
+  width: 100%;
+  height: 100vh; 
+  overflow: hidden;
+  background: #f8fafc;
+}
+.dark .auth-container { background: #020617; }
+
+.auth-form-panel {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  transition: all 0.6s ease-in-out;
+  width: 50%;
+  overflow-y: auto; 
+  scrollbar-width: none; 
+  -ms-overflow-style: none; 
+}
+.auth-form-panel::-webkit-scrollbar { display: none; } 
+
+.auth-form-signin { left: 0; z-index: 2; }
+.auth-form-signup { left: 0; opacity: 0; z-index: 1; }
+
+.auth-container.right-panel-active .auth-form-signin { transform: translateX(100%); }
+.auth-container.right-panel-active .auth-form-signup { transform: translateX(100%); opacity: 1; z-index: 5; animation: show 0.6s; }
+
+.auth-overlay-container {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 50%;
+  height: 100%;
+  overflow: hidden;
+  transition: transform 0.6s ease-in-out;
+  z-index: 100;
+}
+.auth-container.right-panel-active .auth-overlay-container { transform: translateX(-100%); }
+
+/* =========================================
+   THE BACKGROUND IMAGE + DARK GLASS EFFECT
+   ========================================= */
+.auth-overlay {
+  /* Dark glass overlay (slate-900 with 70% opacity) + High-res hackathon image */
+  background-image: 
+    linear-gradient(135deg, rgba(15, 15, 15, 0.15), rgba(15, 15, 15, 0.15)), 
+    url('https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=1600&q=80');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  color: #ffffff;
+  position: relative;
+  left: -100%;
+  height: 100%;
+  width: 200%;
+  transform: translateX(0);
+  transition: transform 0.6s ease-in-out;
+}
+.auth-container.right-panel-active .auth-overlay { transform: translateX(50%); }
+
+.auth-overlay-panel {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 0 40px;
+  text-align: center;
+  top: 0;
+  height: 100%;
+  width: 50%;
+  transform: translateX(0);
+  transition: transform 0.6s ease-in-out;
+  overflow-y: auto; 
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.auth-overlay-panel::-webkit-scrollbar { display: none; }
+
+.auth-overlay-left { transform: translateX(-20%); }
+.auth-container.right-panel-active .auth-overlay-left { transform: translateX(0); }
+.auth-overlay-right { right: 0; transform: translateX(0); }
+.auth-container.right-panel-active .auth-overlay-right { transform: translateX(20%); }
+
+@keyframes show {
+  0%, 49.99% { opacity: 0; z-index: 1; }
+  50%, 100% { opacity: 1; z-index: 5; }
+}
+
+/* Floating Cards Animation */
+@keyframes float-slow {
+  0%, 100% { transform: translateY(0px); }
+  50%      { transform: translateY(-10px); }
+}
+@keyframes float-medium {
+  0%, 100% { transform: translateY(0px); }
+  50%      { transform: translateY(-7px); }
+}
+@keyframes float-fast {
+  0%, 100% { transform: translateY(0px); }
+  50%      { transform: translateY(-5px); }
+}
+.auth-float-slow { animation: float-slow 6s ease-in-out infinite; z-index: 100; }
+.auth-float-medium { animation: float-medium 5s ease-in-out infinite; z-index: 100; }
+.auth-float-fast { animation: float-fast 4s ease-in-out infinite; z-index: 100; }
+
+@media (max-width: 768px) {
+  .auth-container {
+    display: block;
+    height: auto;
+    min-height: 100vh;
+    overflow-y: auto;
   }
+  .auth-form-panel {
+    position: relative;
+    width: 100%;
+    height: auto;
+    min-height: 100vh;
+    transform: none !important;
+    opacity: 1 !important;
+    overflow-y: visible;
+  }
+  .auth-form-signin { display: block; }
+  .auth-form-signup { display: none; }
+  .auth-container.right-panel-active .auth-form-signin { display: none; }
+  .auth-container.right-panel-active .auth-form-signup { display: block; }
+  .auth-overlay-container { display: none; }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* Slow bounce for 404 page */
+@keyframes bounce-slow {
+  0%, 100% { transform: translateY(-5%); }
+  50% { transform: translateY(5%); }
 }
+.animate-bounce-slow {
+  animation: bounce-slow 3s ease-in-out infinite;
+}
+
