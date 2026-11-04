@@ -4,6 +4,7 @@ import "./globals.css";
 import { APP_NAME, APP_DESCRIPTION, APP_URL } from "@/lib/constants";
 import { GlobalToast } from "@/components/ui/GlobalToast";
 import { ThemeProvider } from "@/components/providers/ThemeProvider";
+import { Analytics } from "@vercel/analytics/next";
 
 const geistSans = localFont({
   src: [{ path: "./fonts/Geist-Regular.woff2", weight: "400", style: "normal" }],
@@ -70,6 +71,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
           {children}
           <GlobalToast />
+          <Analytics />
         </ThemeProvider>
       </body>
     </html>
