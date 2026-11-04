@@ -5,6 +5,8 @@ import { PageHero } from "@/components/public/PageHero";
 import { createClient } from "@/lib/supabase/server";
 import { connection } from "next/server";
 
+export const instant = false;
+
 export const metadata = {
   title: "About | Opentity",
   description: "Learn about Opentity, the global hub for hackathons, tech competitions, and AI events.",
